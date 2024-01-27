@@ -1,0 +1,27 @@
+Homepage --> 
+Logo | Home | Posts | Sign In | Register
+////////DIV//////////////////////////////////////////
+Profile_pic Date_of_post
+Content of Post 
+Photo of Recipe
+/////////////////////////////////////////////////////
+Like Comment Bookmark Share
+/////////////////////////////////////////////////////
+Footer--- ç 2024 ---- RecipeHub
+
+Sign In Page (Section)
+Logo | Home | Posts | Log Out
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+Username 
+[UsernameBox Field]
+
+Password
+[Password Field]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+[Forgot Password] 	[Log In]
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''
+New to RecipeHub?
+Create Account [Register/Sign Up box]
+//////////////////////////////////////////////////////
+Footer 
