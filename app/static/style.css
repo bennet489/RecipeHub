@@ -1,0 +1,29 @@
+/* styles.css */
+
+body {
+    background-color: #fafafa /* Set your desired background color */
+}
+
+.container-custom {
+    max-width: 200px; /* Adjust the maximum width of the container */
+}
+
+.row {
+    margin-top: 30px; 
+    margin-bottom: 30px;
+}
+
+.text-center-custom {
+    text-align: center; /* Center-align text */
+}
+
+.card-custom {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.card-body-custom {
+    padding: 30px; /* Increase padding for a more comfortable form */
+}
+.card{
+    border-radius: 10px;
+}
