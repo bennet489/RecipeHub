@@ -1,4 +1,35 @@
 {% extends "base.html" %} {% block title %} changed {% endblock %}
 {% block content %} 
-    <h1> Home page </h1>
+
+ <div class="user-profile">
+        <div class="profile-pic">
+            <img src="your-profile-pic-url.jpg" alt="User Profile">
+        </div>
+        <div>
+            <h2>Gold Israel</h2>
+        </div>
+    </div>
+
+    <!-- Post Section -->
+    <div class="post">
+        <div class="post-content">
+            <h2>Post Title 1</h2>
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+    <!-- File Upload Option -->
+    <div class="file-upload">
+        <input type="file" id="fileInput" onchange="displayFileName()">
+        <label for="fileInput">Upload Images</label>
+        <p id="fileName"></p>
+        </div>
+        <div class="post-buttons">
+            <div class="button"><i class="fas fa-thumbs-up" onclick="likeFunction()"></i></div>
+            <div class="button"><i class="far fa-comment" onclick="commentFunction()"></i></div>
+            <div class="button"><i class="fas fa-share" onclick="shareFunction()"></i></div>
+            <div class="button"><i class="far fa-bookmark" onclick="bookmarkFunction()"></i></div>
+        </div>
+
 {% endblock %}
