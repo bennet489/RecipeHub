@@ -21,6 +21,13 @@
         <input type="submit" value="Submit">
     </form>
 
+    <h1>Enter your recipe content</h1>
+    <form action="/submit_post" method="post">
+        <label for="post_body">Post Body:</label><br>
+        <textarea id="post_body" name="post_body" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
     <!-- File Upload Option -->
     <div class="file-upload">
         <input type="file" id="fileInput" onchange="displayFileName()">
