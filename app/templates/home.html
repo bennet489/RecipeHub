@@ -13,12 +13,14 @@
     <!-- Post Section -->
     <div class="post">
         <div class="post-content">
-            <h2>Post Title 1</h2>
-            <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
+		<h2>Enter Delicacy Name</h2>
+	
+		<form action="/submit_post" method="post">
+        <label for="post_title">Meal Title:</label><br>
+        <input type="text" id="post_title" name="post_title"><br>
+        <input type="submit" value="Submit">
+    </form>
+
     <!-- File Upload Option -->
     <div class="file-upload">
         <input type="file" id="fileInput" onchange="displayFileName()">
