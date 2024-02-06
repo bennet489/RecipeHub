@@ -8,4 +8,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-from app import auth, views
+from app import auth, routes

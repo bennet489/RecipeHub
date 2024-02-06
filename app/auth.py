@@ -6,11 +6,6 @@ from . import db, app, bcrypt
 from flask_login import login_user, current_user
 
 
-@app.route('/home', methods=['GET', 'POST'])
-def home():
-    return render_template('home.html')
-
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = RegistrationForm()
