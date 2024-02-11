@@ -12,20 +12,20 @@
 
     <header>
         <div class="logo">
-            <img src="{{url_for('static', filename='images/logo1.png')}}" alt="Recipe Hub Logo">
         </div>
         <h1 style="display: none;">Recipe Hub</h1>
     </header>
 
     <nav>
-        <a href="{{url_for('home')}}">Home</a>
+        <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" style="display: inline-block; vertical-align: middle; margin-left: 5%; margin-right: 650px; width: 9%;">
+        <a href="{{url_for('home')}}">HOME</a>
         {% if current_user.is_anonymous %}
-            <a href="{{url_for('register')}}">Register</a>
-            <a href="{{url_for('login')}}">Login</a>
+            <a href="{{url_for('register')}}" style="background: linear-gradient(to right, #ff9966 0%,#ff5e62 50%,#ce4c71 100%); border-radius: 50px;">REGISTER</a>
+            <a href="{{url_for('login')}}">LOGIN</a>
         {% else  %}
             <a href="#">Posts</a>
-            <a href="{{url_for('logout')}}">Logout</a>
-            <a href="{{usrl_for('user')}}">Account</a>        
+            <a href="{{url_for('logout')}}">LOGOUT</a>
+            <a href="{{usrl_for('user')}}">ACCOUNT</a>        
             <div class="search-container">
             <input type="text" placeholder="Search...">
         {% endif %}
