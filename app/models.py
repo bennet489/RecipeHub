@@ -1,14 +1,41 @@
-from . import db
+from typing import Optional
+import sqlalchemy as sa
+import sqlalchemy.orm as so
+from app import db, login
+from datetime import datetime, timezone
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.String(60), nullable=False)
-    posts = db.relationship('Post', backref='author', lazy=True)
+@login.user_loader
+def load_user(id):
+    return db.session.get(User, int(id))
+
+class User(UserMixin, db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    full_name: so.Mapped[str] = so.mapped_column(sa.String(64),
+                                                 index=True, unique=True)
+    email: so.Mapped[str] = so.mapped_column(sa.String(120),
+                                              index=True, unique=True)
+    password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+    posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+        return "<User {}>".format(self.full_name)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
+class Post(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    title: so.Mapped[str] = so.mapped_column(sa.String(120))
+    body: so.Mapped[str] = so.mapped_column(sa.String(1000))
+    timestamp: so.Mapped[datetime] = so.mapped_column(index=True,
+                                                      default=lambda: datetime.now(timezone.utc))
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
+    author: so.Mapped[User] = so.relationship(back_populates='posts')
+
+    def __repr__(self):
+        return "<Post: {}>".format(self.body)
+  
