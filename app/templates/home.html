@@ -15,20 +15,12 @@
         <div class="post-content">
     <form action="/submit_post" method="post">
         <textarea id="post_body" placeholder="What's happening?!" name="post_body" rows="4" cols="50"></textarea><br>
-        <input type="submit" value="Post">
     </form>
 
     <!-- File Upload Option -->
     <div class="file-upload">
         <input type="file" id="fileInput" onchange="displayFileName()">
-        <label for="fileInput">Upload Images</label>
         <p id="fileName"></p>
         </div>
-        <div class="post-buttons">
-            <div class="button"><i class="fas fa-thumbs-up" onclick="likeFunction()"></i></div>
-            <div class="button"><i class="far fa-comment" onclick="commentFunction()"></i></div>
-            <div class="button"><i class="fas fa-share" onclick="shareFunction()"></i></div>
-            <div class="button"><i class="far fa-bookmark" onclick="bookmarkFunction()"></i></div>
-        </div>
-
+	<input type="submit" value="Post">
 {% endblock %}

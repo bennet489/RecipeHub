@@ -20,7 +20,7 @@
         <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" style="display: inline-block; vertical-align: middle; margin-left: 5%; margin-right: 650px; width: 9%;">
         <a href="{{url_for('home')}}">HOME</a>
         {% if current_user.is_anonymous %}
-            <a href="{{url_for('register')}}" style="background: linear-gradient(to right, #ff9966 0%,#ff5e62 50%,#ce4c71 100%); border-radius: 50px;">REGISTER</a>
+            <a href="{{url_for('register')}}" style="background: linear-gradient(to right, #ff9966 100%,#ff5e62 0%,#ce4c71 0%); border-radius: 50px;">REGISTER</a>
             <a href="{{url_for('login')}}">LOGIN</a>
         {% else  %}
             <a href="#">Posts</a>
