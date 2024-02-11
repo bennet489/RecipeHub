@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
    
 </head>
@@ -20,11 +19,11 @@
         <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" style="display: inline-block; vertical-align: middle; margin-left: 5%; margin-right: 650px; width: 9%;">
         <a href="{{url_for('home')}}">HOME</a>
         {% if current_user.is_anonymous %}
-            <a href="{{url_for('register')}}" style="background: linear-gradient(to right, #ff9966 100%,#ff5e62 0%,#ce4c71 0%); border-radius: 50px;">REGISTER</a>
-            <a href="{{url_for('login')}}">LOGIN</a>
+            <a href="{{url_for('register')}}" style="background: linear-gradient(to right, #ff9966 100%,#ff5e62 0%,#ce4c71 0%); border-radius: 50px;">Register</a>
+            <a href="{{url_for('login')}}">Sign in</a>
         {% else  %}
             <a href="#">Posts</a>
-            <a href="{{url_for('logout')}}">LOGOUT</a>
+            <a href="{{url_for('logout')}}">Sign out</a>
             <a href="{{usrl_for('user')}}">ACCOUNT</a>        
             <div class="search-container">
             <input type="text" placeholder="Search...">
