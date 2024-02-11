@@ -1,10 +1,17 @@
 nav {
     background-color: #fff;
     overflow: hidden;
+    display: block;
+    float: left;
+    line-height: 16px;
+    width: 85%;
+    height: 30%;
+    position: relative;
     text-align: right;
     margin-right: 14%;
     margin-bottom: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 nav a,
