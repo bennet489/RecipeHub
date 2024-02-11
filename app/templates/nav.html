@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="{{url_for('static', filename='images/logo1.png')}}" alt="Recipe Hub Logo">
+        </div>
+        <h1 style="display: none;">Recipe Hub</h1>
+    </header>
+
+    <nav>
+        <a href="{{url_for('home')}}">Home</a>
+        {% if current_user.is_anonymous %}
+            <a href="{{url_for('register')}}">Register</a>
+            <a href="{{url_for('login')}}">Login</a>
+        {% else  %}
+            <a href="#">Posts</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+            <a href="{{usrl_for('user')}}">Account</a>        
+            <div class="search-container">
+            <input type="text" placeholder="Search...">
+        {% endif %}
+        </div>
+    </nav>
+</body>
+
+</html>
