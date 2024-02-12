@@ -13,4 +13,4 @@ def home():
 @login_required
 def user(full_name):
     user = db.first_or_404(sa.select(User).where(User.full_name == full_name))
-    return render_template('user.html', user=user)
+    return render_template('account.html', user=user)
