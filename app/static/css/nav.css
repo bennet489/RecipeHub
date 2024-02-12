@@ -32,7 +32,9 @@ nav button {
 nav a:hover,
 nav button:hover {
     background-color: #ddd;
-    color: black;
+    color: linear-gradient(to right, #ff9966 100%,
+    #ff5e62 20%,#ce4c71 30%);
+    border-radius: 30px;
 }
 
 .search-container {
