@@ -2,11 +2,14 @@
 
 body {
     font-family: Helvetica, Arial, sans-serif;
-    background-color: #fff; 
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
 .container-custom {
     max-width: 200px;
+    margin-top: 20px;
+    margin-bottom: auto;
+    padding-top: 100px;
 }
 
 .row {
@@ -23,8 +26,43 @@ body {
 }
 
 .card-body-custom {
-    padding: 28px; 
+    padding: 28px;
+    text-align: center;
 }
 .card{
+    text-align: left;
+    max-width: auto;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    display: flex;
+    border-radius: 10px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    align-items: left;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+.text-area {
+    display: block;
+    float: center;
+    text-align: left;
+    margin-bottom: auto;
+    margin-top: auto;
+    border-radius: 15px;
+}
+
+.user-profile {
+    text-align: justify;
+    margin-top: 50px;
+    margin-bottom: auto;
+    display: inline-block;
     border-radius: 30px;
+    padding-top: 1px;
+    align-items: center;
+
+}
+
+.btn {
+    background-color: pink;
+    border-style: hidden;
 }
