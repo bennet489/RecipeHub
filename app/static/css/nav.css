@@ -40,12 +40,12 @@ nav a {
             linear-gradient(to right, #ff9966 5%,
             #ff5e62 0%,#ce4c71 40%); 
             border-radius: 50px;
-            border-style: solid;
+            border-style: none;
             padding-left: 17px; 
             padding-right: 18px;
             padding-bottom: 8px;
             padding-top: 8px;
-            color: black;
+            color: white;
             margin-right: 1%;
 }
 
@@ -66,6 +66,7 @@ nav button:hover {
     #ff5e62 20%,#ce4c71 30%);
     border-radius: 30px;
     color: blue;
+    color: black;
     border-radius: 30px;
     padding-right: 18px; 
     padding-bottom: 8px; 
