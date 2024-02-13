@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-4">CREATE AN ACCOUNT</h5>
+                    <p class="p">Create an account to begin your journey</p>
                     <form method="POST" action="">
                         {{ form.hidden_tag() }}
                         <div class="form-group">
@@ -66,7 +67,7 @@
                     </form>
                 </div>
             </div>
-            <div class="border-top pt-3 mt-3">
+            <br>
                 <small class="text-muted">
                     <small class="a">
                     Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a></small>
