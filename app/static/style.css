@@ -39,6 +39,7 @@ body {
     padding-top: 1px;
     padding-bottom: 10px;
     align-items: left;
+    color: white;
     background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
@@ -75,4 +76,16 @@ body {
 .ml-2 {
     color: black;
     font-size: 1em;
+}
+
+.p {
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-title {
+    color: white;
+    font-weight: bolder;
 }
