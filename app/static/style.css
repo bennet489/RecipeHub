@@ -8,7 +8,6 @@ body {
 .container-custom {
     max-width: 200px;
     margin-top: 20px;
-    margin-bottom: auto;
     padding-top: 100px;
 }
 
@@ -28,16 +27,17 @@ body {
 .card-body-custom {
     padding: 28px;
     text-align: center;
+    margin-bottom: 0%;
 }
 .card{
     text-align: left;
     max-width: auto;
     margin-top: 70px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     display: flex;
     border-radius: 10px;
     padding-top: 1px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     align-items: left;
     color: white;
     background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
