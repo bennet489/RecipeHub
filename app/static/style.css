@@ -66,3 +66,13 @@ body {
     background-color: pink;
     border-style: hidden;
 }
+
+.a {
+    color: white;
+    font-size: 1em;
+}
+
+.ml-2 {
+    color: black;
+    font-size: 1em;
+}

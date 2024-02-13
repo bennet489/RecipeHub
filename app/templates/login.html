@@ -5,7 +5,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Log In</h5>
+                    <h5 class="card-title text-center mb-4">RecipeHub</h5>
                     <form method="POST" action="">
                         {{ form.hidden_tag() }}
                         <div class="form-group">
@@ -40,16 +40,18 @@
                         </div>
                         <div class="text-center mt-4">
                             {{ form.submit(class="btn btn-outline-info") }}
-                            <small class="text-muted ml-2">
-                                <a href="#">Forgot Password?</a>
-                            </small>
+                            <div small class="text-muted ml-2">
+                                <br>
+                                <a class="a" href="#">Forgot Password?</a>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="border-top pt-3 mt-3">
                 <small class="text-muted">
-                    Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+                    <small class="a">
+                    Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a></small>
                 </small>
             </div>
         </div>
