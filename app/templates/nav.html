@@ -17,7 +17,7 @@
 
     <nav>
         <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo">
-        <a href="{{url_for('home')}}">HOME</a>
+        <a href="{{url_for('home')}}">Home</a>
         {% if current_user.is_anonymous %}
             <a href="{{url_for('register')}}">Register</a>
             <a href="{{url_for('login')}}">Sign in</a>
