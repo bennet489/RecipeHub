@@ -10,6 +10,17 @@ from hashlib import md5
 @login.user_loader
 def load_user(id):
     return db.session.get(User, int(id))
+followers = sa.Table(
+    'followers',
+    db.metadata,
+    sa.Column('follower_id', sa.Integer, sa.ForeignKey('user.id'),
+            primary_key=True),
+    sa.Column('followed_id', sa.Integer, sa.ForeignKey('user.id'),
+            primary_key=True)
+)
+  
+
+
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -45,4 +56,5 @@ class Post(db.Model):
 
     def __repr__(self):
         return "<Post: {}>".format(self.body)
-  
+    
+
