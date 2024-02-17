@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationE
 from app import db
 from app.models import User
 import sqlalchemy as sa
+from wtforms.widgets import TextArea
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -12,7 +13,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 class RegistrationForm(FlaskForm):
-    full_name = StringField('Name', validators=[DataRequired(), Length(min=3, max=20)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=50)])
     confirm_password = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password')])
@@ -25,8 +26,16 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Email is already taken')
 
 class EditProfileForm(FlaskForm):
-    full_name = StringField('Full name', validators=[DataRequired(), Length(min=3, max=20)])
+    username = StringField('username', validators=[DataRequired(), Length(min=3, max=20)])
     about_me = TextAreaField('About', validators=[DataRequired(), Length(min=0, max=200)])
     submit = SubmitField('Update')
-        
+
+class EmptyForm(FlaskForm):
+    submit = SubmitField('submit')
+
+class PostForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired()])
+    content = StringField("Content", validators=[DataRequired()], widget=TextArea)
+    author = StringField("Author", validators=[DataRequired()])
+    submit = SubmitField('submit')
 
