@@ -1,26 +1,16 @@
-{% extends "base.html" %} 
-{% block content %} 
-
- <div class="user-profile">
-        <div class="profile-pic">
-            <img src="your-profile-pic-url.jpg" alt="User Profile">
-        </div>
-        <div>
-             <h2>{{ current_user.fullname }}</h2>
-        </div>
-    </div>
-
-    <!-- Post Section -->
-    <div class="post">
-        <div class="post-content">
-    <form action="/submit_post" method="post">
-        <textarea class="text-area" placeholder="Got something to cook?!" name="post_body" rows="4" cols="50"></textarea><br>
-    </form>
-
-    <!-- File Upload Option -->
-    <div class="file-upload">
-        <input type="file" id="fileInput" onchange="displayFileName()">
-        <p id="fileName"></p>
-        </div>
-	<input type="submit" value="Post">
-{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <img class="rounded-circle post-img" src="{{ image_file }}">
+              <a class="mr-2" href="{{ url_for('user_account') }}">{{ post.author.username }}</a>
+            </div>
+            <h2>{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+          
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

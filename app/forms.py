@@ -4,7 +4,8 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationE
 from app import db
 from app.models import User
 import sqlalchemy as sa
-from wtforms.widgets import TextArea
+from flask_wtf.file import FileField, FileAllowed
+from flask_login import current_user
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -25,17 +26,37 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('Email is already taken')
 
-class EditProfileForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), Length(min=3, max=20)])
-    about_me = TextAreaField('About', validators=[DataRequired(), Length(min=0, max=200)])
+class UpdateAccountForm(FlaskForm):
+    username = StringField('Username',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    about_me = StringField('About me')
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
+
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('That username is taken. Please choose a different one.')
+
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('That email is taken. Please choose a different one.')
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('submit')
 
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
-    content = StringField("Content", validators=[DataRequired()], widget=TextArea)
-    author = StringField("Author", validators=[DataRequired()])
-    submit = SubmitField('submit')
+    content = TextAreaField("Content", validators=[DataRequired()])
+    submit = SubmitField('post')
+
+class EditProfileForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    about_me = StringField('About me')
+    submit = SubmitField('update')
 
