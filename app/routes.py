@@ -77,12 +77,17 @@ def unfollow(username):
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        image_file = form.image.data
+        if image_file:
+            image_filename = save_picture(image_file)
+            post = Post(title=form.title.data, content=form.content.data, image_url=image_filename, author=current_user)
+        else:
+            post = Post(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash('post created',  'success')
+        flash('Post created', 'success')
         return redirect(url_for('home'))
-    return render_template('create_post.html', title='New post', form=form)
+    return render_template('create_post.html', title='New Post', form=form)
 
 
 def save_picture(form_picture):

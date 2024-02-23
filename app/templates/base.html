@@ -41,14 +41,26 @@
                             <a class="nav-link" href="{{ url_for('user',  username=current_user.username) }}">Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{url_for('explore')}}" class="nav-link"> Explore</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('user_account') }}">User</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('logout')}}"> Logout </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{url_for('user_account')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Account
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="{{url_for('logout')}}"> Logout </a></li>
+                            </ul>
+                          </li>
+                          <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                          </form>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
@@ -56,6 +68,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('register') }}">Register</a>
                         </li>
+                        
                     {% endif %}
                 </ul>
             </div>

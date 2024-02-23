@@ -53,7 +53,8 @@ class EmptyForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField('post')
+    image = FileField("Image") 
+    submit = SubmitField('Post')
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
