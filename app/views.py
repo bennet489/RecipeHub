@@ -10,15 +10,29 @@ from flask import request, url_for
 @app.route('/home')
 def home():
     page = request.args.get('page', 1, type=int)
-    posts = db.paginate(current_user.following_posts(), page=page,
-                        per_page=app.config['POSTS_PER_PAGE'], error_out=False)
-    next_url = url_for('home', page=posts.next_num) \
-        if posts.has_next else None
-    prev_url = url_for('home', page=posts.prev_num) \
-        if posts.has_prev else None
-    return render_template('home.html', title='Home',
-                           posts=posts.items, next_url=next_url,
-                           prev_url=prev_url)
+    if current_user.is_authenticated:
+        posts = db.paginate(current_user.following_posts(), page=page,
+                            per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+        next_url = url_for('home', page=posts.next_num) \
+            if posts.has_next else None
+        prev_url = url_for('home', page=posts.prev_num) \
+            if posts.has_prev else None
+        return render_template('home.html', title='Home',
+                               posts=posts.items, next_url=next_url,
+                               prev_url=prev_url)
+    else:
+        # Handle case where user is not authenticated
+        # For example, you can simply render the home page without following posts
+        query = sa.select(Post).order_by(Post.timestamp.desc())
+        posts = db.paginate(query, page=page,
+                            per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+        next_url = url_for('home', page=posts.next_num) \
+            if posts.has_next else None
+        prev_url = url_for('home', page=posts.prev_num) \
+            if posts.has_prev else None
+        return render_template('home.html', title='Home',
+                               posts=posts.items, next_url=next_url,
+                               prev_url=prev_url)
 
 @app.route('/user/<username>')
 @login_required

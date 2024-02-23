@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
                                                   nullable=False, default='default.jpg')
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
-    last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(
+    last_seen: so.Mapped[datetime] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc))
 
     posts: so.WriteOnlyMapped['Post'] = so.relationship(
@@ -102,7 +102,7 @@ class Post(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(100))
     content: so.Mapped[str] = so.mapped_column(sa.String(10000))
-    image_url: so.Mapped[str] = so.mapped_column(sa.String(255))
+    image_url: so.Mapped[Optional[str]] = so.mapped_column(sa.String(255), nullable=True)
     timestamp: so.Mapped[datetime] = so.mapped_column(
         index=True, default=lambda: datetime.now(timezone.utc))
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),

@@ -1,15 +1,26 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-    {% for post in posts %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <img class="rounded-circle post-img" src="{{ image_file }}">
-              <a class="mr-2" href="{{ url_for('user_account') }}">{{ post.author.username }}</a>
+    <div class="container">
+        {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ post.author.image_url }}" alt="User Image" class="rounded-circle" width="50" height="50">
+                        <div class="ms-3">
+                            <h6 class="mb-0">{{ post.author.username }}</h6>
+                            <p class="mb-0">{{ post.timestamp.strftime('%B %d, %Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    {% if post.image_url %}
+                        <img src="{{ post.image_url }}" alt="Post Image" class="img-fluid mt-3">
+                    {% endif %}
+                </div>
             </div>
-            <h2>{{ post.title }}</h2>
-            <p class="article-content">{{ post.content }}</p>
-          </div>
-        </article>
-    {% endfor %}
-{% endblock content %}
+        {% endfor %}
+    </div>
+{% endblock %}

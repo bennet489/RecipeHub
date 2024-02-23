@@ -1,59 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container min-vh-100 d-flex justify-content-center align-item-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center mb-4">RECIPEHUB</h5>
-                    <p class="p">Login here with your email and password</p>
-                    <form method="POST" action="">
-                        {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            {{ form.email.label(class="form-control-label") }}
-                            {% if form.email.errors %}
-                                {{ form.email(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.email.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.email(class="form-control") }}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ form.password.label(class="form-control-label") }}
-                            {% if form.password.errors %}
-                                {{ form.password(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.password.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.password(class="form-control") }}
-                            {% endif %}
-                        </div>
-                        <div class="form-check">
-                            {{ form.remember_me(class="form-check-input") }}
-                            {{ form.remember_me.label(class="form-check-label") }}
-                        </div>
-                        <div class="text-center mt-4">
-                            {{ form.submit(class="btn btn-outline-info") }}
-                            <div small class="text-muted ml-2">
-                                <br>
-                                <a class="a" href="#">Forgot Password?</a>
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-6">RECIPEHUB</h5>
+                <p class="p">Login here with your email and password</p>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
                             </div>
+                        {% else %}
+                            {{ form.email(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="form-control-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-check">
+                        {{ form.remember_me(class="form-check-input") }}
+                        {{ form.remember_me.label(class="form-check-label") }}
+                    </div>
+                    <div class="text-center mt-4">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                        <div small class="text-muted ml-2">
+                            <br>
+                            <a class="a" href="#">Forgot Password?</a>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <br>
-                <small class="text-muted">
-                    <small class="a">
-                    Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a></small>
-                </small>
+                    </div>
+                </form>
             </div>
         </div>
+        <br>
+        <small class="text-muted">
+            <h6 class="text-center">
+                Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
+            </h6>
+        </small>
+    </div>
 </div>
 {% endblock content %}
