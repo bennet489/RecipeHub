@@ -1,3 +1,4 @@
+from flask import current_app
 from datetime import datetime, timezone
 from hashlib import md5
 from typing import Optional
@@ -5,7 +6,11 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from app import db, login
+from itsdangerous import URLSafeSerializer as Serializer
+from app import db
+from app import login
+from sqlalchemy.sql import func
+
 
 
 followers = sa.Table(
@@ -16,6 +21,7 @@ followers = sa.Table(
     sa.Column('followed_id', sa.Integer, sa.ForeignKey('user.id'),
               primary_key=True)
 )
+
 
 
 class User(UserMixin, db.Model):
@@ -31,8 +37,10 @@ class User(UserMixin, db.Model):
     last_seen: so.Mapped[datetime] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc))
 
-    posts: so.WriteOnlyMapped['Post'] = so.relationship(
-        back_populates='author')
+    posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
+    comments: so.Mapped['Comment'] = so.relationship(backref='user', passive_deletes=True)
+    likes: so.Mapped['Like'] = so.relationship( backref='user', passive_deletes=True)
+    
     following: so.WriteOnlyMapped['User'] = so.relationship(
         secondary=followers, primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
@@ -41,9 +49,22 @@ class User(UserMixin, db.Model):
         secondary=followers, primaryjoin=(followers.c.followed_id == id),
         secondaryjoin=(followers.c.follower_id == id),
         back_populates='following')
+    
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -91,6 +112,7 @@ class User(UserMixin, db.Model):
             .group_by(Post)
             .order_by(Post.timestamp.desc())
         )
+    
 
 
 @login.user_loader
@@ -102,12 +124,34 @@ class Post(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(100))
     content: so.Mapped[str] = so.mapped_column(sa.String(10000))
-    image_url: so.Mapped[Optional[str]] = so.mapped_column(sa.String(255), nullable=True)
+    image: so.Mapped[Optional[str]] = so.mapped_column(sa.String(255), nullable=True)
     timestamp: so.Mapped[datetime] = so.mapped_column(
         index=True, default=lambda: datetime.now(timezone.utc))
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
                                                index=True)
-    author: so.Mapped[User] = so.relationship(back_populates='posts')
+    author: so.Mapped['User'] = so.relationship(back_populates='posts')
+    comments: so.Mapped['Comment'] = so.relationship(backref='post', passive_deletes=True)
+    likes: so.Mapped['Like'] = so.relationship(backref='post', passive_deletes=True)
 
     def __repr__(self):
         return '<Post {}>'.format(self.content)
+
+class Comment(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    text: so.Mapped[str] = so.mapped_column(sa.String(200), nullable=False)
+    timestamp: so.Mapped[datetime] = so.mapped_column(
+        sa.DateTime(timezone=True), default=func.now())
+    author_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(
+        'user.id', ondelete="CASCADE"), nullable=False)
+    post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(
+        'post.id', ondelete="CASCADE"), nullable=False)
+
+
+class Like(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    timestamp: so.Mapped[datetime] = so.mapped_column(
+        sa.DateTime(timezone=True), default=func.now())
+    author_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(
+        'user.id', ondelete="CASCADE"), nullable=False)
+    post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(
+        'post.id', ondelete="CASCADE"), nullable=False)

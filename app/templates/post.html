@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block content %}
+<div class="card">
+  <div class="top">
+    <div class="userDetails">
+      <div class="profile_image">
+        <img src="{{url_for('static' filename='images/profile_image/default.jpg')}}" class="cover">
+      </div>
+        <h3> Gold Israel <br> <span> 4hrs ago </span> </h3>
+    </div>
+    <div>
+      <img src="{{url_for('static', filename='icons/three_dots.jpg')}}" class="dots">
+    </div>
+  </div>
+  <div class="post-title">
+    <h2> Lorem ipsum dolor sit amet consectetur adipisicing elit. </h2>
+  </div>
+  <div class="post-content">
+    <h4> Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br> Sequi ea atque dolorum sit magnam nostrum sunt consectetur quod eveniet, optio ratione, ut temporibus accusantium. <br> Tempore illum necessitatibus aut quam sunt?</h4>
+  </div>
+  <div class="imgBox">
+    <img src="{{url_for('static', filename='images/post_images/spag.jpg')}}" class="cover">
+  </div>
+  <div class="actionBtns">
+    <div class="left">
+      <img src="{{url_for('static', filename='icons/heart.jpg')}}" onclick="likeBtn()" class="heart">
+      <img src="{{url_for('static', filename='icons/comment.jpg')}}" lass="comment">
+    </div>
+    <div class="right">
+      <img src="{{url_for('static', filename='icons/bookmark.jpg')}}" class="bookmark">
+    </div>
+  </div>
+  <h4 class="likes">100 likes </h4>
+  <h4 class="comments"> view all comments (30) </h4>
+  <div class="addComment">
+    <div class="userImg">
+      <img src="{{url_for('static', filename='images/profile_image/default.jpg')}}" class="cover">
+    </div>
+    <input type="text" class="text" placeholder="Add a comment...">
+  </div>
+  <div class="postTime"> 2 hours ago </div>
+</div>
+{endblock content }
+
+<script>
+  function likeBtn(){
+    let heart = document.querySelector('.heart');
+    let likes = document.querySelector('.likes')
+    if (heart.src.match("{{url_for('static', filename='icons/heart.jpg')}}")){
+      heart.src = "{{url_for('static', filename='icons/red_heart.jpg')}}";
+      likes.innerHTML = "101 likes";
+    }
+    else{
+      heart.src = "{{url_for('static', filename='icons/heart.jpg')}}"
+      likes.innerHTML = "100 likes";
+    }
+  }
+</script>
